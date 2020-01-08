@@ -69,7 +69,6 @@ public class TestCRMBase {
 	}
 
 	public static void highLightElement(WebDriver driver, WebElement locator) {
-		JavascriptExecutor js = ((JavascriptExecutor) driver);
 		String bgColor = locator.getCssValue("backgroundColor");
 
 		for (int i = 0; i < 10; i++) {
@@ -82,5 +81,15 @@ public class TestCRMBase {
 		JavascriptExecutor js = ((JavascriptExecutor) driver);
 		js.executeScript("argument[0].style.backgroundColor = '" + color + "'", locator);
 
+	}
+	
+	public static void scrollDownPage(WebDriver driver) {
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		js.executeScript("window.scrollTo(0,document.body.scrollHieght");
+	}
+	
+	public static void scrollTillElementInView(WebDriver driver , WebElement locator) {
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		js.executeScript("argument[0].scrollIntoView", locator);
 	}
 }
