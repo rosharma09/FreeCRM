@@ -1,5 +1,16 @@
 package com.crm.qa.pages;
 
-public class HomePage {
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
+import com.crm.qa.base.TestCRMBase;
+
+public class HomePage extends TestCRMBase {
+
+	@FindBy(xpath = "//div//span[@class='user-display']")
+	WebElement userInfoLabel;
+
+	@FindBy(xpath = "//*[text()=\"Contacts\"]")
+	WebElement contactsLink;
+	
 }

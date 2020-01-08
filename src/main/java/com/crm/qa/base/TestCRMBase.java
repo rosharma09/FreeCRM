@@ -6,9 +6,14 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.crm.qa.util.TestUtil;
 
@@ -16,7 +21,7 @@ public class TestCRMBase {
 
 	// we are going to initialize the generic properties in the base class
 
-	// Global variables 
+	// Global variables
 	public static WebDriver driverObject;
 	public static Properties prop;
 
@@ -54,6 +59,28 @@ public class TestCRMBase {
 		driverObject.manage().timeouts().implicitlyWait(TestUtil.implicit_wait, TimeUnit.SECONDS);
 
 		driverObject.get(prop.getProperty("URL"));
+
+	}
+
+	public static void explicitWait(WebDriver driver, WebElement locator, int timeOut) {
+		new WebDriverWait(driver, timeOut).ignoring(StaleElementReferenceException.class)
+				.until(ExpectedConditions.elementToBeClickable(locator));
+		locator.click();
+	}
+
+	public static void highLightElement(WebDriver driver, WebElement locator) {
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		String bgColor = locator.getCssValue("backgroundColor");
+
+		for (int i = 0; i < 10; i++) {
+			changeColorMethod(driver, locator, "rgb(0,200,0)");
+			changeColorMethod(driver, locator, bgColor);
+		}
+	}
+
+	public static void changeColorMethod(WebDriver driver, WebElement locator, String color) {
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		js.executeScript("argument[0].style.backgroundColor = '" + color + "'", locator);
 
 	}
 }
