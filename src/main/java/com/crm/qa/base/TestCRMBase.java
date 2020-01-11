@@ -12,10 +12,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.crm.qa.util.TestUtil;
+import com.crm.qa.util.WebEventListner;
 
 public class TestCRMBase {
 
@@ -24,6 +26,8 @@ public class TestCRMBase {
 	// Global variables
 	public static WebDriver driverObject;
 	public static Properties prop;
+	public static EventFiringWebDriver e_driver ;
+	public static WebEventListner eventListner;
 
 	public TestCRMBase() {
 
@@ -53,6 +57,12 @@ public class TestCRMBase {
 			driverObject = new FirefoxDriver();
 		}
 
+		e_driver = new EventFiringWebDriver(driverObject); // Object of eventFiringWebDriver class
+		// We create an object of eventListner to register it with EventFiringListner
+		eventListner = new WebEventListner();
+		e_driver.register(eventListner); // register eventListner object with event firing webdriver
+		driverObject = e_driver;
+		
 		driverObject.manage().window().maximize();
 		driverObject.manage().timeouts().pageLoadTimeout(TestUtil.page_load_timeout, TimeUnit.SECONDS);
 		driverObject.manage().deleteAllCookies();
