@@ -1,11 +1,13 @@
 package com.crm.qa.util;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -20,7 +22,7 @@ public class TestUtil extends TestCRMBase {
 	public static long implicit_wait = 20;
 
 	static Workbook book;
-	static org.apache.poi.ss.usermodel.Sheet sheet;
+	static Sheet sheet;
 
 	public static String testSheetPath = "C:\\Users\\rosharma\\eclipse-workspace\\FreeCRMtest"
 			+ "\\src\\main\\java\\com\\crm\\qa\\testdata\\TestCRM_TestData-Automation.xlsx";
@@ -28,16 +30,16 @@ public class TestUtil extends TestCRMBase {
 	public void switchToFrame(String frameName) {
 		driverObject.switchTo().frame(frameName);
 	}
-	
-	//To take screenshot using selenium 
-	
+
+	// To take screenshot using selenium
+
 	public static void takeScreenshotAtEndOfTest() throws IOException {
 		File scrFile = ((TakesScreenshot) driverObject).getScreenshotAs(OutputType.FILE);
 		String currentDir = System.getProperty("user.dir");
 		FileUtils.copyFile(scrFile, new File(currentDir + "/screenshots/" + System.currentTimeMillis() + ".png"));
 	}
 
-	public static Object[][] getTestData(String sheetName) {
+	public static Object[][] getTestData(String sheetName) throws Exception {
 		FileInputStream fileInput = null;
 		try {
 			fileInput = new FileInputStream(testSheetPath);
@@ -53,13 +55,9 @@ public class TestUtil extends TestCRMBase {
 			e.printStackTrace();
 		}
 
-		try {
-			sheet = book.getSheet(sheetName);
-		} catch (Exception e) {
-			System.out.println("Sheet not present");
-			e.printStackTrace();
-		}
-		
+		String sheetname = book.getSheetAt(0).toString();
+		sheet = book.getSheet(sheetname);
+
 		Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
 		// TO store the data in the excel file in the 2D array we are going to use for
 		// loop

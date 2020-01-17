@@ -1,4 +1,5 @@
 com\crm\qa\pages\DealsPage.class
+com\crm\qa\util\WebEventListner.class
 com\crm\qa\base\TestCRMBase.class
 com\crm\qa\pages\HomePage.class
 com\crm\qa\util\TestUtil.class

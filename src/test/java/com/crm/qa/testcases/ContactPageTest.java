@@ -19,7 +19,7 @@ public class ContactPageTest extends TestCRMBase {
 	ContactPage contactPageObj;
 	TestUtil testUtilObj;
 
-	String ContactPageSheetName = "ContactPageDataSheet";
+	String SheetName = "ContactInfo";
 
 	public ContactPageTest() {
 
@@ -53,8 +53,8 @@ public class ContactPageTest extends TestCRMBase {
 	}
 
 	@DataProvider
-	public Object[][] getTestDataFromDataProvider() {
-		Object data[][] = TestUtil.getTestData(ContactPageSheetName);
+	public Object[][] getTestDataFromDataProvider() throws Exception {
+		Object data[][] = TestUtil.getTestData(SheetName);
 		return data;
 	}
 

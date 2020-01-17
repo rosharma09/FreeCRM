@@ -1,6 +1,5 @@
 package com.crm.qa.util;
 
-
 import java.io.IOException;
 
 import org.openqa.selenium.By;
@@ -11,17 +10,18 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import com.crm.qa.base.TestCRMBase;
 
-/*************************************** PURPOSE **********************************
-- This class implements the WebDriverEventListener, which is included under events.
-The purpose of implementing this interface is to override all the methods and define certain useful  Log statements 
-which would be displayed/logged as the application under test is being run.
-Do not call any of these methods, instead these methods will be invoked automatically
-as an when the action done (click, findBy etc). 
-*/
+/***************************************
+ * PURPOSE ********************************** - This class implements the
+ * WebDriverEventListener, which is included under events. The purpose of
+ * implementing this interface is to override all the methods and define certain
+ * useful Log statements which would be displayed/logged as the application
+ * under test is being run. Do not call any of these methods, instead these
+ * methods will be invoked automatically as an when the action done (click,
+ * findBy etc).
+ */
 
+public class WebEventListner extends TestCRMBase implements WebDriverEventListener {
 
-public class WebEventListner extends TestCRMBase implements WebDriverEventListener{
-	
 	public void beforeNavigateTo(String url, WebDriver driver) {
 		System.out.println("Before navigating to: '" + url + "'");
 	}
@@ -130,34 +130,32 @@ public class WebEventListner extends TestCRMBase implements WebDriverEventListen
 
 	public <X> void afterGetScreenshotAs(OutputType<X> arg0, X arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void afterGetText(WebElement arg0, WebDriver arg1, String arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void afterSwitchToWindow(String arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public <X> void beforeGetScreenshotAs(OutputType<X> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void beforeGetText(WebElement arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void beforeSwitchToWindow(String arg0, WebDriver arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 }
